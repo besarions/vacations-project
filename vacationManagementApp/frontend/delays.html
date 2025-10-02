@@ -1,0 +1,50 @@
+<div class="delays-container">
+    <!-- ძებნა თანამშრომლის -->
+    <div class="search-section">
+        <label>ძებნა:</label>
+        <input type="text" id="searchInput" placeholder="პირადი ნომერი, სახელი ან გვარი">
+        <button onclick="searchUser()">ძებნა</button>
+    </div>
+
+    <!-- თანამშრომლის ინფორმაცია -->
+    <div id="userInfo" style="display:none;">
+        <h3>თანამშრომელი</h3>
+        <p><b>პირადი ნომერი:</b> <span id="userPid"></span></p>
+        <p><b>სახელი:</b> <span id="userFirst"></span></p>
+        <p><b>გვარი:</b> <span id="userLast"></span></p>
+    </div>
+
+    <!-- Delays ფორმა -->
+    <form id="delayForm" style="display:none;" onsubmit="saveDelay(event)">
+        <label>სამუშო თარიღი:</label>
+        <input type="date" id="work_date" required><br>
+
+        <label>დასაწყისი დრო:</label>
+        <input type="time" id="scheduled_start_time" required><br>
+
+        <label>მოსვლის დრო:</label>
+        <input type="time" id="check_in_time"><br>
+
+        <label>დაგვიანება:</label>
+        <input type="text" id="late_duration" readonly><br>
+
+        <label>დასრულების დრო:</label>
+        <input type="time" id="scheduled_end_time" required><br>
+
+        <label>წასვლის დრო:</label>
+        <input type="time" id="check_out_time"><br>
+
+        <label>ადრე წასვლა:</label>
+        <input type="text" id="early_leave_duration" readonly><br>
+
+        <label>
+      <input type="checkbox" id="violation_notice" checked>
+      დარღვევაზე შეტყობინება
+    </label><br>
+
+        <label>კომენტარი:</label>
+        <textarea id="comment"></textarea><br>
+
+        <button type="submit">შენახვა</button>
+    </form>
+</div>

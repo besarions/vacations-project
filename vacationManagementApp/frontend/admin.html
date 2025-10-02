@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ადმინის კაბინეტი</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+    <!-- HEADER -->
+    <header>
+        <h1>ადმინის კაბინეტი</h1>
+        <button id="logoutBtn" class="btn btn-logout">გამოსვლა</button>
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <button data-tab="clients" type="button" onclick="openClientModal()">ახალი თანამშრომლის დამატება</button>
+        <button data-tab="clients" class="active">თანამშრომლების სია</button>
+        <button data-tab="leaves">შვებულებები</button>
+        <button data-tab="delays">დაგვიანებები</button>
+        <button data-tab="other">პარამეტრები</button>
+        <button data-tab="clients" type="button" onclick="openClientsDataModal()">ახალი თანამშრომლების სიის დამატება</button>
+    </nav>
+
+    <main class="dashboard">
+
+        <!-- frontend/html/admin_clients_import.html -->
+        <div id="clientsDataModal" class="modal">
+            <div class="modal-content_admin">
+                <span class="close" onclick="closeClientsDataModal()">&times;</span>
+                <h2>კლიენტების იმპორტი</h2>
+                <button id="downloadSampleBtn" class="btn btn-secondary">ნიმუშის ჩამოტვირთვა</button>
+                <input type="file" id="importClientsFile" style="width:auto" />
+                <button id="previewClientsBtn">წინასწარ ჩვენება</button>
+            </div>
+        </div>
+
+        <!-- USERS SECTION -->
+        <!-- Leave Modal -->
+        <div id="clientModal" class="modal">
+            <div class="modal-content_admin">
+                <span class="close" onclick="closeClientModal()">&times;</span>
+                <h2 id="modalTitle">ახალი თანამშრომლის დამატება</h2>
+                <form id="userForm" class="user-form">
+                    <input type="hidden" id="userId">
+
+                    <!-- Row 1 -->
+                    <div class="form-left">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>პირადი №</label>
+                                <input type="text" id="personal_id" required>
+
+                                <label>გვარი</label>
+                                <input type="text" id="last_name" required>
+
+                                <label>სახელი</label>
+                                <input type="text" id="first_name" required>
+
+                                <label>პაროლი</label>
+                                <input type="password" id="password">
+
+                                <label>დაბ. თარიღი</label>
+                                <input type="date" id="date_of_birth" required>
+
+                                <label>პოზიცია</label>
+                                <select id="position_id" required></select>
+
+                                <label>დაწყება</label>
+                                <input type="date" id="start_date" required>
+
+                                <div class="form-group">
+                                    <label>დასრულება</label>
+                                    <input type="date" id="end_date">
+
+                                    <label>ფასიანი შვ. დღეები</label>
+                                    <input type="number" step="0.01" id="leave_days" min="0">
+
+                                    <label>უფასო შვ. დღეები</label>
+                                    <input type="number" id="unpaid_leave_days" value="0">
+
+                                    <label>ბიულეტენი</label>
+                                    <input type="number" id="sick_leave_days" value="0">
+
+                                    <label>სტატუსი</label>
+                                    <select id="status" required>
+                                        <option value="active" selected>აქტიური</option>
+                                        <option value="inactive">არააქტიური</option>
+                                    </select>
+
+                                    <label>როლი</label>
+                                    <select id="role" required>
+                                        <option value="Client" selected>კლიენტი</option>
+                                        <option value="Admin">ადმინი</option>
+                                        <option value="Validator">ვალიდატორი</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-buttons-column">
+                            <button type="button" class="btn btn-clear" onclick="clearForm()">გასუფთავება</button>
+                            <button type="submit" class="btn btn-save">შენახვა</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="passwordModal" class="modal">
+            <div class="modal-content_admin">
+                <span class="close" onclick="closePasswordModal()">&times;</span>
+                <h2>პაროლის შეცვლა</h2>
+                <form id="passwordForm">
+                    <input type="hidden" id="passwordUserId">
+                    <div class="form-group">
+                        <label>ახალი პაროლი</label>
+                        <input type="password" id="newPassword" required>
+                    </div>
+                    <button type="submit">შენახვა</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Search & Users Table -->
+        <section id="clients" class="tab-content active">
+            <h2>თანამშრომლების სია</h2>
+            <div class="search-row">
+                <label>ძებნა:</label>
+                <input type="text" id="searchUsers" placeholder="პირადი №, სახელი, გვარი">
+            </div>
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>პირადი №</th>
+                        <th>გვარი</th>
+                        <th>სახელი</th>
+                        <th>დაბ. თარიღი</th>
+                        <th>პოზიცია</th>
+                        <th>დაწყება</th>
+                        <th>დასრულება</th>
+                        <th>შვ. დღეები</th>
+                        <th>უფასო შვ.</th>
+                        <th>ბიულეტენი</th>
+                        <th>სტატუსი</th>
+                        <th>როლი</th>
+                        <th>შექმნის დრო</th>
+                        <th>განახლების დრო</th>
+                        <th>მოქმედება</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <section id="leaves" class="tab-content">
+            <!-- Leave Requests -->
+            <section class="card">
+                <h2>შვებულებების სია</h2>
+                <div class="search-row">
+                    <label>ძებნა:</label>
+                    <input type="text" id="searchRequests" placeholder="პირადი №, სახელი, გვარი">
+                </div>
+                <table id="requestsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>პირადი №</th>
+                            <th>გვარი</th>
+                            <th>სახელი</th>
+                            <th>დაწყება</th>
+                            <th>დასრულება</th>
+                            <th>გამოყენებული დღეები</th>
+                            <th>კომენტარი</th>
+                            <th>სტატუსი</th>
+                            <th>მიმდინარე სტატუსი</th>
+                            <th>შექმნის დრო</th>
+                            <th>განახლების დრო</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+        </section>
+
+        <!-- Delays Section -->
+        <section id="delays" class="tab-content">
+            <h2>მოსვლის და წასვლის კონტროლი</h2>
+            <div class="search-row">
+                <label>ძებნა:</label>
+                <input type="text" id="searchDelays" placeholder="პირადი №, სახელი, გვარი">
+            </div>
+            <table id="delaysTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>პირადი №</th>
+                        <th>გვარი</th>
+                        <th>სახელი</th>
+                        <th>თარიღი</th>
+                        <th>დაგეგმილი მოსვლა</th>
+                        <th>ფაქტობრივი მოსვლა</th>
+                        <th>გაიცდენა (დაგვიანება)</th>
+                        <th>დაგეგმილი წასვლა</th>
+                        <th>ფაქტობრივი წასვლა</th>
+                        <th>გაიცდენა (წასვლა ადრე)</th>
+                        <th>შენიშვნა</th>
+                        <th>გაფრ.</th>
+                        <th>შექმნის დრო</th>
+                        <th>განახლების დრო</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="pagination" id="delaysPagination"></div>
+        </section>
+
+        <!-- Preview Modal -->
+        <div id="previewModal" style="display:none; position:fixed; top:10%; left:10%; width:80%; height:80%; background:white; border:1px solid #ccc; overflow:auto; z-index:1000; padding:20px;">
+            <h3>სია დასაიმპორტებლად</h3>
+            <input type="file" id="importClientsFile" />
+            <button id="previewClientsBtn">Preview</button>
+            <button id="commitClientsBtn">Commit</button>
+            <button id="closePreviewModal">Close</button>
+            <table id="previewTable" border="1" style="width:100%; margin-top:10px;">
+                <thead>
+                    <tr>
+                        <th>პირადი №</th>
+                        <th>გვარი</th>
+                        <th>სახელი</th>
+                        <th>პაროლი</th>
+                        <th>დაბ. თარიღი</th>
+                        <th>პოზიცია</th>
+                        <th>დაწყება</th>
+                        <th>დასრულება</th>
+                        <th>ფასიანი შვ.</th>
+                        <th>უფასო შვ.</th>
+                        <th>ბიულეტენი</th>
+                        <th>სტატუსი</th>
+                        <th>როლი</th>
+                        <th>შენიშვნები</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+        <section id="other" class="tab-content">
+
+            <!-- POSITIONS, HOLIDAYS, LEAVE TYPES -->
+            <div class="dashboard top-panels">
+                <!-- Position Card -->
+                <section class="card">
+                    <h2>პოზიციის შექმნა</h2>
+                    <form id="positionForm">
+                        <input type="hidden" id="positionId">
+                        <div class="form-group">
+                            <label>პოზიციის სახელი</label>
+                            <input type="text" id="positionName" required>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-save">შენახვა</button>
+                        </div>
+                    </form>
+                    <div class="search-row">
+                        <label>ძებნა პოზიციების მიხედვით:</label>
+                        <input type="text" id="searchPositions" placeholder="პოზიციის სახელი">
+                    </div>
+                    <h3>პოზიციების სია</h3>
+                    <table id="positionsTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>სახელი</th>
+                                <th>მოქმედება</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </section>
+
+                <!-- Holidays Card -->
+                <section class="card dashboard-card">
+                    <h2>დასვენების დღეების შექმნა</h2>
+                    <form id="holidayForm" class="holiday-form">
+                        <input type="hidden" id="holidayId">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>თარიღი</label>
+                                <input type="date" id="holidayDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>სახელი</label>
+                                <input type="text" id="holidayName" required>
+                            </div>
+                        </div>
+                        <div class="form-buttons-row">
+                            <button type="button" class="btn btn-clear" onclick="clearHolidayForm()">გასუფთავება</button>
+                            <button type="submit" class="btn btn-save">შენახვა</button>
+                        </div>
+                    </form>
+                    <div class="search-row">
+                        <label>ძებნა დასვენების დღეებში:</label>
+                        <input type="text" id="searchHolidays" placeholder="სახელი ან თარიღი">
+                    </div>
+                    <h3>დასვენების დღეების სია</h3>
+                    <table id="holidaysTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>თარიღი</th>
+                                <th>სახელი</th>
+                                <th>მოქმედება</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </section>
+
+                <!-- Leave Types Card -->
+                <section class="card dashboard-card">
+                    <h2>შვებულების ტიპების შექმნა</h2>
+                    <form id="leaveTypeForm">
+                        <input type="hidden" id="leaveTypeId">
+                        <div class="form-group">
+                            <label>სახელი</label>
+                            <input type="text" id="leaveTypeName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>აღწერა</label>
+                            <textarea id="leaveTypeDescription"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>აქტიური</label>
+                            <input type="checkbox" id="leaveTypeActive" checked>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-clear" onclick="clearLeaveTypeForm()">გასუფთავება</button>
+                            <button type="submit" class="btn btn-save">შენახვა</button>
+                        </div>
+                    </form>
+                    <div class="search-row">
+                        <label>ძებნა შვ. ტიპებში:</label>
+                        <input type="text" id="searchLeaveTypes" placeholder="სახელი ან აღწერა">
+                    </div>
+                    <h3>შვ. ტიპების სია</h3>
+                    <table id="leaveTypesTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>სახელი</th>
+                                <th>აღწერა</th>
+                                <th>სტატუსი</th>
+                                <th>მოქმედება</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </section>
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
