@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ka">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ვალიდატორის კაბინეტი</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>ვალიდატორის კაბინეტი</h1>
+        <button id="logoutBtn" class="btn btn-logout">გამოსვლა</button>
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <button data-tab="leaves" class="active">შვებულებები</button>
+        <button data-tab="delays">დაგვიანებები</button>
+        <button data-tab="clients">თანამშრომლები</button>
+        <button data-tab="other">სხვა</button>
+    </nav>
+
+    <!-- Leaves Section -->
+    <section id="leaves" class="tab-content active">
+        <h2>შვებულების მოთხოვნები სია</h2>
+        <input type="text" id="searchLeaves" placeholder="ძიება პირადი №, სახელი ან გვარით">
+        <button id="exportLeavesBtn">📅 შვებულებების ექსპორტი</button>
+        <table id="leavesTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>პირადი №</th>
+                    <th>გვარი</th>
+                    <th>სახელი</th>
+                    <th>შვ. დაწყება</th>
+                    <th>შვ. დასრულება</th>
+                    <th>მოთხ. დღეები</th>
+                    <th>შვებულების ტიპი</th>
+                    <th>კომენტარი</th>
+                    <th>სტატუსი</th>
+                    <th>მდგომარეობა</th>
+                    <th>შექმნის დრო</th>
+                    <th>განახლების დრო</th>
+                    <th>მოქმედება</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="pagination" id="leavesPagination"></div>
+    </section>
+
+    <!-- Delays Section -->
+    <section id="delays" class="tab-content">
+        <h2>მოსვლის და წასვლის კონტროლი</h2>
+        <input type="text" id="searchDelays" placeholder="ძიება პირადი №, სახელი ან გვარით">
+        <button id="exportDelaysBtn">⏰ დაგვიანებების ექსპორტი</button>
+        <table id="delaysTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>პირადი №</th>
+                    <th>გვარი</th>
+                    <th>სახელი</th>
+                    <th>თარიღი</th>
+                    <th>დაგეგმილი მოსვლა</th>
+                    <th>ფაქტობრივი მოსვლა</th>
+                    <th>გაიცდენა (დაგვიანება)</th>
+                    <th>დაგეგმილი წასვლა</th>
+                    <th>ფაქტობრივი წასვლა</th>
+                    <th>გაიცდენა (წასვლა ადრე)</th>
+                    <th>შენიშვნა</th>
+                    <th>გაფრ.</th>
+                    <th>შექმნის დრო</th>
+                    <th>განახლების დრო</th>
+                    <th>მოქმედება</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="pagination" id="delaysPagination"></div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="tab-content">
+        <h2>კლიენტები სია</h2>
+        <input type="text" id="searchClients" placeholder="ძიება პირადი №, სახელი ან გვარით">
+        <button id="exportClientsBtn">👤 თანამშრომლების ექსპორტი</button>
+        <table id="clientsTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>პირადი №</th>
+                    <th>გვარი</th>
+                    <th>სახელი</th>
+                    <th>დაბ. თარიღი</th>
+                    <th>პოზიცია</th>
+                    <th>სამ. დაწყება</th>
+                    <th>სამ. დასასრული</th>
+                    <th>ფასიანი შვ. დღეები</th>
+                    <th>უფასო შვ. დღეები</th>
+                    <th>ბიულეტენის დღეები</th>
+                    <th>სტატუსი</th>
+                    <th>შექმნის დრო</th>
+                    <th>განახლების დრო</th>
+                    <th>დაგვიანების დამატება</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="pagination" id="clientsPagination"></div>
+    </section>
+
+    <!-- Other Section -->
+    <section id="other" class="tab-content">
+        <div class="dashboard">
+            <section class="card">
+                <h2>დასვენების დღეები</h2>
+                <table id="holidaysTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>თარიღი</th>
+                            <th>სახელი</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <section class="card">
+                <h2>პოზიციები</h2>
+                <table id="positionsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>სახელი</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+        </div>
+    </section>
+
+
+    <!-- Delay Modal -->
+    <div id="delayModal" class="modal" style="display:none;">
+        <div class="modal-overlay" onclick="closeDelayForm()"></div>
+        <div class="modal-content">
+            <h3>დაგვიანების შეტანა</h3>
+            <form id="delayForm">
+                <label>პირადი №</label>
+                <input type="text" id="delayPersonalId" readonly>
+
+                <label>თანამშრომელი</label>
+                <input type="text" id="delayFullName" readonly>
+
+                <label>თარიღი</label>
+                <input type="date" id="work_date" required>
+
+                <label>დაგეგმილი მოსვლა</label>
+                <input type="time" id="scheduled_start_time">
+
+                <label>ფაქტიკური მოსვლა</label>
+                <input type="time" id="check_in_time">
+
+                <label>დაგეგმილი წასვლა</label>
+                <input type="time" id="scheduled_end_time">
+
+                <label>ფაქტიკური წასვლა</label>
+                <input type="time" id="check_out_time">
+
+                <label>შენიშვნა</label>
+                <textarea id="comment"></textarea>
+                <label><input type="checkbox" id="violation_notice" style="width:auto"> დარღვევის გაფრთხილება </label>
+
+                <div class="form-buttons">
+                    <button type="submit" id="saveBtn" class="btn btn-save">შენახვა</button>
+                    <button type="button" class="btn btn-clear" onclick="closeDelayForm()">გაუქმება</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/validator.js"></script>
+
+</body>
+
+</html>

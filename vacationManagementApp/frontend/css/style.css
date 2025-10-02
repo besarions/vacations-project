@@ -1,0 +1,741 @@
+/* === GLOBAL RESET === */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+
+/* === HEADER === */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c3e50;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+}
+
+.btn-logout {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.btn-logout:hover {
+    background: #c0392b;
+}
+
+
+/* === DASHBOARD LAYOUT === */
+
+.dashboard {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.left-column {
+    flex: 2;
+    margin-top: 30px;
+}
+
+.right-column {
+    flex: 1;
+    margin-top: 30px;
+}
+
+
+/* === CARD === */
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.card h2,
+.card h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+
+/* === TABLES === */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+table th,
+table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table th {
+    background: #ecf0f1;
+    font-weight: 600;
+}
+
+table tr:nth-child(even) {
+    background: #fafafa;
+}
+
+table tr:hover {
+    background-color: #d0ebff !important;
+    transition: 0.2s;
+}
+
+
+/* === BUTTONS === */
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    border: none;
+}
+
+.btn-save {
+    background: #27ae60;
+    color: #fff;
+}
+
+.btn-save:hover {
+    background: #1e8449;
+}
+
+.btn-clear {
+    background: #95a5a6;
+    color: #fff;
+}
+
+.btn-clear:hover {
+    background: #7f8c8d;
+}
+
+
+/* === FORMS === */
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    transition: 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+
+/* Horizontal Form */
+
+.horizontal-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.horizontal-form .form-group {
+    flex: 1 1 calc(33.33% - 15px);
+}
+
+
+/* Remaining + used holidays */
+
+#remaining_days,
+#used_holidays {
+    display: inline-table;
+    width: 100%;
+    margin-right: 4%;
+    padding: 2px;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+
+/* Litepicker styling */
+
+.litepicker {
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.litepicker .is-selected {
+    background-color: #4cafef !important;
+    color: white !important;
+    border-radius: 8px;
+}
+
+.litepicker .day-item:hover {
+    background-color: #d0ebff !important;
+    border-radius: 8px;
+}
+
+.litepicker .is-locked {
+    color: #fe7785 !important;
+    font-weight: bold;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+.litepicker .is-today {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: inherit !important;
+}
+
+
+/* Leave Form: Left + Right Columns */
+
+.leave-form {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.form-left {
+    flex: 1.5;
+    display: block;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* Form buttons full width below columns */
+
+.leave-form .form-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+
+/* Form rows: for side-by-side fields */
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+
+/* Full width fields */
+
+.full-width {
+    width: 100%;
+}
+
+
+/* Buttons: side-by-side, full width equally */
+
+.form-buttons {
+    display: contents;
+    gap: 10px;
+    width: 100%;
+}
+
+.form-buttons .btn {
+    flex: 1;
+}
+
+
+/* === LOGIN PAGE STYLING === */
+
+.login-container {
+    max-width: 400px;
+    margin: 120px auto;
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.login-container h1 {
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-size: 2rem;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-container input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.login-container input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+
+.login-container button {
+    padding: 12px;
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.login-container button:hover {
+    background: #1e8449;
+}
+
+#errorMsg {
+    color: #e74c3c;
+    margin-top: 12px;
+    font-weight: 600;
+    min-height: 20px;
+}
+
+
+/* === VALIDATOR DASHBOARD ADDITIONS === */
+
+
+/* Search inputs styling */
+
+#searchLeaves,
+#searchClients {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+#searchLeaves:focus,
+#searchClients:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+
+
+/* Responsive adjustments */
+
+@media (max-width: 1400px) {
+    .dashboard {
+        flex-direction: column;
+    }
+    .left-column,
+    .right-column {
+        flex: 1;
+    }
+}
+
+@media (max-width: 1024px) {
+    table {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* Approve / Reject buttons */
+
+.btn-approve {
+    background-color: #27ae60;
+    /* მწვანე */
+    color: #fff;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.btn-approve:hover {
+    background-color: #1e8449;
+}
+
+.btn-reject {
+    background-color: #e74c3c;
+    /* წითელი */
+    color: #fff;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.btn-reject:hover {
+    background-color: #c0392b;
+}
+
+
+/* მცირე მარაგი მაგრად */
+
+table td button {
+    margin-right: 5px;
+}
+
+
+/* Dashboard Flexbox for 3 columns */
+
+.dashboard {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    flex: 1 1 calc(33.33% - 20px);
+    min-width: 300px;
+    /* არ დაიშალოს ძალიან პატარა ეკრანზე */
+}
+
+
+/* Flatpickr styles */
+
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+    color: #e74c3c !important;
+}
+
+
+/* Personal Form Styling */
+
+.personal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 1.05rem;
+    /* ოდნავ გაზრდილი ტექსტი */
+}
+
+.personal-form .form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.personal-form .form-group label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.personal-form input {
+    font-size: 1rem;
+    padding: 10px 12px;
+}
+
+
+/* როცა სახელი+გვარი ერთშია, გავუზრდი სიგანეს */
+
+.personal-form .full-name-group {
+    grid-column: span 2;
+    /* დაიკავებს 2 სვეტს რომ ლამაზი იყოს */
+}
+
+
+/* pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #3498db;
+    color: #fff;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination button.active {
+    background: #3498db;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+/* ✅ დამატებულია სტატუსის ფერების სტილები */
+
+.status-active {
+    background-color: #d4edda !important;
+    /* მწვანე ღია */
+}
+
+.status-rejected {
+    background-color: #f8d7da !important;
+    /* ღია წითელი */
+}
+
+.status-pending {
+    background-color: #fff3cd !important;
+    /* ღია ყვითელი */
+}
+
+.violation-yes {
+    background-color: #f8d7da !important;
+    /* ღია წითელი */
+    color: #c0392b;
+    font-weight: bold;
+}
+
+.violation-no {
+    background-color: #d4edda !important;
+    /* ღია მწვანე */
+    color: #1e8449;
+    font-weight: bold;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    /* ან სადაც გინდა */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+    /* ჩამოსვლის პოზიცია ქვედა ნაწილში */
+    padding: 20px;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    /* ან სადაც გინდა */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+}
+
+.modal-content_admin {
+    position: absolute;
+    left: 40%;
+    top: 0;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    animation: slideUp 0.3s ease;
+}
+
+.modal-content {
+    position: fixed;
+    left: 40%;
+    top: 0;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+
+/* === Navbar === */
+
+nav {
+    display: flex;
+    gap: 15px;
+    background: #34495e;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+nav button {
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+nav button.active,
+nav button:hover {
+    background: #3498db;
+}
+
+
+/* ყველა section default დამალული */
+
+section.tab-content {
+    display: none;
+}
+
+section.tab-content.active {
+    display: block;
+}
+
+
+/* Other section layout */
+
+#other .dashboard {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#other .card {
+    flex: 1 1 45%;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#other table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#other th,
+#other td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+
+/* === MODAL === */
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#other .top-panels {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+#other .top-panels .card {
+    flex: 1 1 calc(33.33% - 20px);
+    min-width: 280px;
+}
